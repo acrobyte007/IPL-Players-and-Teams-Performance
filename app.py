@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from st_aggrid import AgGrid
+
 
 # Function to load and process IPL data from deliveries.csv
 @st.cache
@@ -163,7 +163,7 @@ def batsman_with_most_fours(ipl_data):
     return total_fours_sorted
 
 # Define the calculate_head_to_head_stats function
-import pandas as pd
+
 
 def head_to_head_match_details(ipl_data, team1, team2):
     # Filter IPL data for head-to-head matches between the selected teams
@@ -247,14 +247,14 @@ def main():
         st.header("Batsman Statistics")
         selected_batsman = st.selectbox("Select Batsman", batsman_stats['batter'].unique())
         batsman_section = batsman_stats[batsman_stats['batter'] == selected_batsman]
-        AgGrid(batsman_section)
+        st.write(batsman_section.round(2))
 
     # Bowler statistics section
     elif selected_section == "bowler_stats":
         st.header("Bowler Statistics")
         selected_bowler = st.selectbox("Select Bowler", bowler_stats['bowler'].unique())
         bowler_section = bowler_stats[bowler_stats['bowler'] == selected_bowler]
-        AgGrid(bowler_section)
+        st.write(bowler_section.round(2))
 
     # Batsman vs bowler interaction section
     elif selected_section == "batsman_vs_bowler":
@@ -269,13 +269,13 @@ def main():
         interaction_data = interaction_data.drop(columns=['match_id'])
         interaction_data = interaction_data.round(2)
         # Display interaction data
-        AgGrid(interaction_data)
+        st.write(interaction_data.round(1))
 
         # Calculate and display detailed statistics for the encounter
         encounter_stats_df = calculate_bowler_vs_batsman_stats(ipl_data, selected_batsman_interaction,
                                                                selected_bowler_interaction)
 
-        AgGrid(encounter_stats_df)
+        st.write(encounter_stats_df.round(1))
 
     # Most runs by a batsman section
     elif selected_section == "most_runs":
@@ -289,13 +289,13 @@ def main():
 
 
         # Display list of batsmen with their total runs in two columns and enable scrolling
-        AgGrid(batsmen_runs_df)
+        st.write(batsmen_runs_df)
 
     # Most wickets by a bowler section
     elif selected_section == "most_wickets":
         st.header("Most Wickets by  Bowlers")
         st.write("Bowlers sorted by their wickets:")
-        AgGrid(most_wickets_bowler)
+        st.write(most_wickets_bowler)
         # Apply CSS styling for scrolling within the table
         # Most sixes by a batsman section
     elif selected_section == "most_sixes":
@@ -304,13 +304,13 @@ def main():
 
 
         # Display list of batsmen with their total sixes in two columns and enable scrolling
-        AgGrid(most_sixes_batsman)
+        st.write(most_sixes_batsman)
 
     # Most fours by a batsman section
     elif selected_section == "most_fours":
         st.header("Most Fours by  Batsmen")
         st.write("Batsmen sorted by their fours:")
-        AgGrid(most_fours_batsman)
+        st.write(most_fours_batsman)
     if selected_section == "Head-to-Head Matches":
         st.header("Head-to-Head Matches (Wait for 10s only)" )
 
@@ -332,7 +332,7 @@ def main():
             st.write(f"{selected_team_1} wins: {team1_wins}")
             st.write(f"{selected_team_2} wins: {team2_wins}")
             st.write("Details of each match:")
-            AgGrid(match_details_df)
+            st.write(match_details_df.round(2))
         else:
             st.write("No head-to-head matches found between the selected teams.")
 
