@@ -1,7 +1,7 @@
 # IPL Player Performance Dashboard
 
 This is a Streamlit web application for analyzing the performance of IPL players based on match data.
-
+[https://jg7vlcuf8fnnnttgnh7yva.streamlit.app/]
 ## Installation
 
 1. Clone the repository:
